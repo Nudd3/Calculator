@@ -1,0 +1,126 @@
+
+
+html{
+    text-align: center;
+    
+}
+
+#calculator{
+    
+    width: 30%;
+    height: auto;
+    padding: 10px;
+    border: 1px solid;
+    background: gray;
+    border-radius: 5px;
+}
+
+#display{
+    
+    background: white;
+    border:1px solid;
+    padding: 20px; 
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-align: right;
+    font-size: 30px;
+
+
+}
+
+#btn-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+}
+
+.btn{
+    font-size: 20px;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    margin-right: 3px; 
+    padding: 20px;
+    border: none;
+    background: white;
+}
+
+.btn:hover{
+    background: rgb(238, 238, 238);
+}
+
+.btn:active{
+    background: red;
+}
+
+#clearBtn{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    transition: var(--transition-delay);
+    background-color: #F7FFA9;
+}
+
+#backBtn{
+    grid-column-start: 3;
+    grid-column-end: 5;
+    background-color: #B2A9FF;
+    transition: var(--transition-delay);
+}
+
+body {
+
+    --accent-color: orangered;
+    --background-color: rgb(252, 252, 252);
+    --text-color: black;
+    --button-text-color: var(--background-color);
+    --transition-delay: 1s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    transition: var(--transition-delay);
+
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+body.dark{
+    --accent-color: hsl(60, 53%, 61%);
+    --background-color: #333;
+    
+    
+}
+
+body.dark #clearBtn{
+    background-color: #28d785;
+    
+}
+
+body.dark #backBtn{
+    
+    background-color: #D7287A;
+}
+
+#theme-swap-btn{
+    background-color: var(--accent-color);
+    color: var(--button-text-color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: .5em 1em;
+    border-radius: .3em;
+    border: none;
+    margin-bottom: 3em;
+    outline: none;
+    transition: var(--transition-delay);
+    transform: scale(1);
+}
+
+#theme-swap-btn:hover,
+#theme-swap-btn:focus {
+    transform: scale(1.1);
+}

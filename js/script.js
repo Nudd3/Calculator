@@ -1,3 +1,5 @@
+// TODO! Fix the screen resizing when empty
+
 // Get elements 
 const display = document.querySelector("[data-display]");
 const numbers = document.querySelectorAll("[data-number]");
@@ -13,9 +15,14 @@ let secondOperand = "";
 let displayValue = null;
 let shouldResetDisplay = false;
 
+
+
+
 // Event listeners
 equals.addEventListener("click", evaluate);
 clearBtn.addEventListener("click", clear);
+eraseBtn.addEventListener("click", erase);
+point.addEventListener("click", appendPoint);
 
 numbers.forEach((btn) => 
     btn.addEventListener("click", () => appendNumber(btn.textContent))
@@ -25,19 +32,22 @@ operators.forEach((btn) =>
     btn.addEventListener("click", () => appendOperator(btn.textContent))
 );
 
-eraseBtn.addEventListener("click", erase);
-point.addEventListener("click", appendPoint);
 
-function appendNumber(number){
+
+appendNumber = (number) => {
     if(display.textContent === "0" || shouldResetDisplay){
         resetDisplay();
     }
+    if(display.textContent === 0 || shouldResetDisplay){
+        alert("HELLO");
+        resetDisplay();
+    }
     
-        display.textContent += number;
+    display.textContent += number;
     
 }
 
-function appendOperator(operator) {
+appendOperator = (operator) => {
     if(displayValue !== null){
         evaluate();
     }
@@ -46,9 +56,17 @@ function appendOperator(operator) {
     shouldResetDisplay = true;
 }
 
-function appendPoint(point){
+function appendPoint(point){    
+    if(shouldResetDisplay){
+        resetDisplay();
+    }
+    if(display.textContent === ""){
+        display.textContent = "0";
+    }
+    if(display.textContent.includes(".")){
+        return; // Cannot have two points
+    }
     display.textContent += ".";
-    shouldResetDisplay = true;
 }
 
 function evaluate() {
@@ -71,23 +89,23 @@ function clear() {
     displayValue = null;
 }
 
-function resetDisplay(){
+resetDisplay = () => {
     display.textContent = "";
     shouldResetDisplay = false;
 }
 
-function roundResult(number){
+roundResult = (number) => {
     return Math.round(number * 1000) / 1000;
 }
 
-function erase(){
-    displayValue = displayValue.slice(0, -1);
-    shouldResetDisplay = false;
+function erase() {
+    display.textContent = display.textContent.toString().slice(0, -1);
+
 }
 
 // add, subtract, multiply and divide methods
-function add(a, b){
-    return Number(a + b);
+add = (a, b) => {
+    return a + b;
 };
 
 
@@ -101,14 +119,15 @@ multiply = (a, b) => {
 }
 
 divide = (a, b) => {
-    return Number(a / b);
+    return a / b;
 }
 
 /**
  * Gets an operator and two operands and arguments
  * and operates on them
  */
-function operate(operator, number1, number2){
+
+operate = (operator, number1, number2) => {
 
     number1 = Number(number1);
     number2 = Number(number2);
@@ -122,7 +141,6 @@ function operate(operator, number1, number2){
     } else if (operator === '÷') {
         return divide(number1, number2);
     }
-
 }
 
 // Theme swap

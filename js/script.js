@@ -1,5 +1,3 @@
-// TODO! Fix the screen resizing when empty
-
 // Get elements 
 const display = document.querySelector("[data-display]");
 const numbers = document.querySelectorAll("[data-number]");
@@ -8,6 +6,7 @@ const equals = document.querySelector("[data-equals]");
 const clearBtn = document.querySelector("[data-clear]");
 const eraseBtn = document.querySelector("[data-erase]");
 const point = document.querySelector("[data-point]");
+const themeSwap = document.querySelector("[data-swap]");
 
 // Global variables 
 let firstOperand = "";
@@ -19,36 +18,27 @@ let shouldResetDisplay = false;
 
 
 // Event listeners
-equals.addEventListener("click", evaluate);
 clearBtn.addEventListener("click", clear);
 eraseBtn.addEventListener("click", erase);
 point.addEventListener("click", appendPoint);
-
-numbers.forEach((btn) => 
+equals.addEventListener("click", evaluate);
+numbers.forEach((btn) =>
     btn.addEventListener("click", () => appendNumber(btn.textContent))
 );
-
-operators.forEach((btn) => 
+operators.forEach((btn) =>
     btn.addEventListener("click", () => appendOperator(btn.textContent))
 );
 
-
-
-appendNumber = (number) => {
-    if(display.textContent === "0" || shouldResetDisplay){
+// Functions
+function appendNumber(number) {
+    if (display.textContent === "0" || shouldResetDisplay) {
         resetDisplay();
     }
-    if(display.textContent === 0 || shouldResetDisplay){
-        alert("HELLO");
-        resetDisplay();
-    }
-    
     display.textContent += number;
-    
 }
 
-appendOperator = (operator) => {
-    if(displayValue !== null){
+function appendOperator(operator) {
+    if (displayValue !== null) {
         evaluate();
     }
     firstOperand = display.textContent;
@@ -56,22 +46,22 @@ appendOperator = (operator) => {
     shouldResetDisplay = true;
 }
 
-function appendPoint(point){    
-    if(shouldResetDisplay){
+function appendPoint(point) {
+    if (shouldResetDisplay) {
         resetDisplay();
     }
-    if(display.textContent === ""){
+    if (display.textContent === "") {
         display.textContent = "0";
     }
-    if(display.textContent.includes(".")){
+    if (display.textContent.includes(".")) {
         return; // Cannot have two points
     }
     display.textContent += ".";
 }
 
 function evaluate() {
-    if(displayValue === null || shouldResetDisplay) return;
-    if(displayValue === "÷" && display.textContent === "0"){
+    if (displayValue === null || shouldResetDisplay) return;
+    if (displayValue === "÷" && display.textContent === "0") {
         alert("Division by zero!");
         clear();
         return;
@@ -89,12 +79,12 @@ function clear() {
     displayValue = null;
 }
 
-resetDisplay = () => {
+function resetDisplay() {
     display.textContent = "";
     shouldResetDisplay = false;
 }
 
-roundResult = (number) => {
+function roundResult(number) {
     return Math.round(number * 1000) / 1000;
 }
 
@@ -103,31 +93,23 @@ function erase() {
 
 }
 
-// add, subtract, multiply and divide methods
-add = (a, b) => {
+function add(a, b) {
     return a + b;
 };
 
-
-
-subtract = (a, b) => {
+function subtract(a, b) {
     return a - b;
 }
 
-multiply = (a, b) => {
+function multiply(a, b) {
     return a * b;
 }
 
-divide = (a, b) => {
+function divide(a, b) {
     return a / b;
 }
 
-/**
- * Gets an operator and two operands and arguments
- * and operates on them
- */
-
-operate = (operator, number1, number2) => {
+function operate(operator, number1, number2) {
 
     number1 = Number(number1);
     number2 = Number(number2);
@@ -144,7 +126,15 @@ operate = (operator, number1, number2) => {
 }
 
 // Theme swap
-document.querySelector("#theme-swap-btn").addEventListener
-("click", () => {
+let shouldBeDark = false;
+document.querySelector("#theme-swap-btn").addEventListener("click", () => {
     document.body.classList.toggle("dark");
+    if(shouldBeDark === true){
+        themeSwap.textContent = "GO LIGHT";
+        shouldBeDark = false;
+    } else {
+        themeSwap.textContent = "GO DARK";
+        shouldBeDark = true;
+    }
+    
 })

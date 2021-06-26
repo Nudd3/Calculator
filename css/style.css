@@ -1,8 +1,6 @@
-
-
-html{
-    text-align: center;
-    
+html {
+    background-color: #F0F7F4;
+    background-color: red;
 }
 
 #calculator{
@@ -18,14 +16,13 @@ html{
 #display{
     
     background: white;
-    border:1px solid;
+    /* border:1px solid; */
     padding: 20px; 
     border-radius: 5px;
     margin-bottom: 5px;
     text-align: right;
     font-size: 30px;
-
-
+    height: 1em;
 }
 
 #btn-container{
@@ -42,6 +39,7 @@ html{
     padding: 20px;
     border: none;
     background: white;
+    transition: var(--transition-delay);
 }
 
 .btn:hover{
@@ -56,7 +54,7 @@ html{
     grid-column-start: 1;
     grid-column-end: 3;
     transition: var(--transition-delay);
-    background-color: #F7FFA9;
+    background-color: #16F3E8;
 }
 
 #backBtn{
@@ -64,12 +62,13 @@ html{
     grid-column-end: 5;
     background-color: #B2A9FF;
     transition: var(--transition-delay);
+    background-color: #37FB72;
 }
 
 body {
 
     --accent-color: orangered;
-    --background-color: rgb(252, 252, 252);
+    --background-color: #F4ECD6;
     --text-color: black;
     --button-text-color: var(--background-color);
     --transition-delay: 1s;
@@ -84,23 +83,40 @@ body {
 
     background-color: var(--background-color);
     color: var(--text-color);
+
 }
 
 body.dark{
     --accent-color: hsl(60, 53%, 61%);
-    --background-color: #333;
+    /*--background-color: #333;*/
+    --background-color: #020202;
     
     
 }
 
+body.dark #display{
+    background-color: #C8C8C8;
+}
+
 body.dark #clearBtn{
-    background-color: #28d785;
+    /*background-color: #28d785;*/
+    background-color: #FFC857;
     
 }
 
 body.dark #backBtn{
-    
-    background-color: #D7287A;
+    /* background-color: #D7287A; */
+    background-color: #F50041;
+}
+
+body.dark .btn{
+    /* background-color: #333; */ 
+    background-color: #C8C8C8;
+}
+
+body.dark .btn:hover,
+body.dark .btn:focus {
+    background-color: rgb(255, 49, 49);
 }
 
 #theme-swap-btn{

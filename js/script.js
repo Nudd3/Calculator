@@ -18,6 +18,7 @@ let shouldResetDisplay = false;
 
 
 // Event listeners
+window.addEventListener("keydown", getKBInput);
 clearBtn.addEventListener("click", clear);
 eraseBtn.addEventListener("click", erase);
 point.addEventListener("click", appendPoint);
@@ -126,15 +127,68 @@ function operate(operator, number1, number2) {
 }
 
 // Theme swap
-let shouldBeDark = false;
+let turnDark = true;
 document.querySelector("#theme-swap-btn").addEventListener("click", () => {
     document.body.classList.toggle("dark");
-    if(shouldBeDark === true){
+    if (turnDark === true) {
         themeSwap.textContent = "GO LIGHT";
-        shouldBeDark = false;
+        turnDark = false;
     } else {
         themeSwap.textContent = "GO DARK";
-        shouldBeDark = true;
+        turnDark = true;
     }
-    
-})
+});
+
+// Keyboard input
+function getKBInput(key) {
+    if (key.keyCode >= 48 && key.keyCode <= 57) {
+        const nr = findNumber(key.keyCode);
+        appendNumber(nr);
+    } else if (key.keyCode === 107 || key.keyCode === 187) {
+        appendOperator("+");
+    } else if (key.keyCode === 189 || key.keyCode === 109) {
+        appendOperator("-");
+    } else if (key.keyCode === 106 || key.keyCode === 220) {
+        appendOperator("x");
+    } else if (key.keyCode === 55 || key.keyCode === 111) {
+        appendOperator("÷");
+    } else if (key.keyCode === 190) {
+        appendPoint();
+    } else if(key.keyCode === 13){
+        evaluate();
+    }
+
+}
+
+function findNumber(keyCode) {
+    if (keyCode === 48) {
+        return 0;
+    } else if (keyCode === 49) {
+        return 1;
+    } else if (keyCode === 50) {
+        return 2;
+    } else if(keyCode === 51){
+        return 3;
+    } else if(keyCode === 52){
+        return 4;
+    } else if(keyCode === 53){
+        return 5;
+    } else if(keyCode === 54){
+        return 6;
+    }  else if(keyCode === 55){
+        return 7;
+    } else if(keyCode === 56){
+        return 8;
+    } else if(keyCode === 57){
+        return 9;
+    }
+}
+
+/*
+  Enter: 13
+  *: 106 || 220
+  +: 187 || 107
+  -: 189 || 109
+  /: 55 || 111
+
+*/

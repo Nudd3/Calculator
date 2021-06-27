@@ -27,7 +27,11 @@ body.dark {
   margin-bottom: 3em;
   outline: none;
   background-color: #f04290;
-  transition: 1s;
+  transition: 0.7s;
+}
+
+#theme-swap-btn:hover{
+    transform: scale(1.1);
 }
 
 body.dark #theme-swap-btn {

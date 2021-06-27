@@ -114,7 +114,7 @@ function operate(operator, number1, number2) {
 
     number1 = Number(number1);
     number2 = Number(number2);
-    console.log("INSIDE");
+
     if (operator === '+') {
         return add(number1, number2);
     } else if (operator === '-') {
@@ -139,24 +139,28 @@ document.querySelector("#theme-swap-btn").addEventListener("click", () => {
     }
 });
 
-// Keyboard input
+// Keyboard input for the Numpad
 function getKBInput(key) {
+    console.log(key.keyCode);
     if (key.keyCode >= 48 && key.keyCode <= 57) {
         const nr = findNumber(key.keyCode);
         appendNumber(nr);
-    } else if (key.keyCode === 107 || key.keyCode === 187) {
+    } else if (key.keyCode === 107) {
         appendOperator("+");
-    } else if (key.keyCode === 189 || key.keyCode === 109) {
+    } else if (key.keyCode === 109) {
         appendOperator("-");
-    } else if (key.keyCode === 106 || key.keyCode === 220) {
+    } else if (key.keyCode === 106) {
         appendOperator("x");
-    } else if (key.keyCode === 55 || key.keyCode === 111) {
+    } else if (key.keyCode === 111) {
         appendOperator("÷");
     } else if (key.keyCode === 190) {
         appendPoint();
+    } else if(key.keyCode === 8){
+        erase();
     } else if(key.keyCode === 13){
         evaluate();
     }
+    key.preventDefault();
 
 }
 
@@ -183,12 +187,3 @@ function findNumber(keyCode) {
         return 9;
     }
 }
-
-/*
-  Enter: 13
-  *: 106 || 220
-  +: 187 || 107
-  -: 189 || 109
-  /: 55 || 111
-
-*/
